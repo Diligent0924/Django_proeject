@@ -33,6 +33,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # 내부 어플
     'pages',
+    'main',
+    # 기본
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
