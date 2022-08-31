@@ -7,6 +7,7 @@
     <title>Main</title>
 </head>
 <body>
+  <h1>로그인 페이지</h1>
   <form action='/pages/' method = 'GET'>
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
@@ -22,8 +23,6 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  {% if alert == True %}
-  <p>{{alert}}</p>
-  {% endif %}
+  <a href="{% url 'info' %}" class="btn btn-primary">회원가입</a>
 </body>
 </html>

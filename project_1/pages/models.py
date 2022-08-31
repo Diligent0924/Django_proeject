@@ -3,10 +3,12 @@ from django.db import models
 # Create your models here.
 class login(models.Model):
     id = models.IntegerField(primary_key=True)
-    grade = models.CharField(max_length=10, default = 'IM')
-    password = models.CharField(max_length=20,default='1111')
     name = models.CharField(max_length=50)
+    password = models.CharField(max_length=20,default='1111')
+    email = models.EmailField(default='00000@naver.com')
+    grade = models.CharField(max_length=10, default = 'IM')
     age = models.IntegerField()
+    telephone = models.IntegerField()
     descript = models.TextField()
     
     def __Str__(self):
