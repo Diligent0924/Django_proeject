@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>NEW</h1>
+<form action='{% url 'movies:create' %}' method = 'POST'>
+  {% csrf_token %}
+    <div class="mb-3">
+      <label for="title" class="form-label">TITLE</label>
+      <input type="text" class="form-control" id="title" name='title' placeholder='아이디를 입력하세요'>
+    </div>
+    <div class="mb-3">
+      <label for="audience" class="form-label">AUDIENCE</label>
+      <input type="number" class="form-control" id="audience" name='audience' placeholder='비밀번호를 입력하세요'>
+    </div>
+    <div class="mb-3">
+        <label for="release_date" class="form-label">RELEASE_DATE</label>
+        <input type="date" class="form-control" id="release_date" name='release_date' placeholder='나이를 적으세요'>
+      </div>
+    <div class="form-floating">
+      <select class="form-select" id="genre" aria-label="Floating label select example" name='genre'>
+        <option selected>Open this select menu</option>
+        {% for genre in genres %}
+        <option value = genre>{{genre}}</option>
+        {% endfor %}
+      </select>
+      <label for="floatingSelect">Works with selects</label>
+    </div>
+    <div class="mb-3">
+      <label for="score" class="form-label">SCORE</label>
+      <input type="number" class="form-control" id="score" name='score' placeholder='점수를 적으세요' min=0.0 max=10.0 step=0.1>
+    </div>
+    <div class="mb-3">
+      <label for="poster_url" class="form-label">POSTER_URL</label>
+      <input type="type" class="form-control" id="poster_url" name='poster_url' placeholder='영화 URL을 적으세요'>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">DESCRIPTION</label>
+      <input type="type" class="form-control" id="description" name='description' placeholder='설명을 적으세요'>
+    </div>
+    <button type="submit" class="btn btn-primary">submit</button>
+</form>
+{% endblock content %}

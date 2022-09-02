@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container alert alert-success">
+  <h1 class='text-center my-3'>상영중인 영화</h1>
+  <div class='text-center'>
+    <a href="{% url 'movies:new' %}" class="text-decoration-none text-dark">영화 추가하기</a> 
+  </div>
+</div>
+{% for article in articles reversed %}
+  <div class="container text-center">
+    <div class="row my-5">
+      <div class="col">
+        <img src="{{article.poster_url}}" alt="image" width='400'>
+      </div>
+      <div class="col">
+        <hr>
+        <h1>{{article.title}}</h1>
+        <div class='my-3 fs-5'>
+          
+         평점 : <b>{{article.score}}</b>
+        </div>
+        <div class='my-3 fs-5'>
+        출시일자 : {{article.release}}
+        </div>
+        <div class='my-3 fs-5'>
+        장르  :    {{article.genre}}
+        </div>
+        <div class='my-3 fs-6'>
+          간략한 줄거리 : {{article.sub_description}}
+        </div>
+        <a href="{% url 'movies:detail' article.id %}">
+          <button class="btn btn-primary">자세히 보기</button>
+        </a>
+      </div>
+    <div>
+  </div>
+{% endfor %}
+{% endblock content %}

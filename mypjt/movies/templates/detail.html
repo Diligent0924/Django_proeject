@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='text-center'>
+<img src="{{article.poster_url}}" alt="image" width='500'>
+</div>
+<h1 class='text-center my-5'>줄거리</h1>
+<hr>
+<div class='text-center'>
+  <b>{{article.title}}</b> <br>
+  Audience : {{article.audience}} <br>
+  Release Dates : {{article.release}} <br>
+  Genre : {{article.genre}} <br>
+  Score : {{article.score}} <br><br><br>
+  {{article.description}} <br>
+  <ul class="nav justify-content-center my-3">
+    <li class="nav-item">
+      <a href="{% url 'movies:edit' article.id %}" class="nav-link">EDIT</a> 
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'movies:delete' article.id %}" class="nav-link text-danger">DELETE</a>
+    </li>
+    <li class="nav-item">
+      <a href="{% url 'movies:index' %}" class="nav-link">BACK</a>
+    </li>
+  </ul>
+{% endblock content %}
