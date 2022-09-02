@@ -1,3 +1,4 @@
+{% extends 'base.html' %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +7,10 @@
     <title>Document</title>
 </head>
 <body>
+  {% block content %}
     <h1>Info</h1>
-    <form action='/pages/joinmembership/' method = 'GET'>
+    <form action='/pages/joinmembership/' method = 'POST'>
+      {% csrf_token %}
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" id="name" name='name' placeholder='아이디를 입력하세요'>
@@ -38,5 +41,12 @@
         </div>
         <button type="submit" class="btn btn-primary">가입완료</button>
     </form>
+    {% if same_name == 1 %}
+      <p>동일한 아이디가 있습니다. {{name}} 이외에 다른 이름을 적어주세요.</p>
+    {% endif %}
+    {% if same_password == 1 %}
+      <p>동일한 비밀번호가 있습니다. {{password}} 이외에 다른 이름을 적어주세요.</p>
+    {% endif %}
+  {% endblock content %}
 </body>
 </html>

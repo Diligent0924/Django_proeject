@@ -1,0 +1,13 @@
+<p>Database page</p>
+
+{% for article in articles%}
+{% comment %} 여기서의 url은 detail.html을 의미하는것
+              django의 url과는 아무런 연관성이 없다.
+{% endcomment %}
+<a href="{% url 'detail' article.id %}"> 
+<p>{{article.id}}</p>
+<p>{{article.name}}</p>
+<p>{{article.age}}</p>
+<p>{{article.descript}}</p>
+</a>
+{% endfor %}

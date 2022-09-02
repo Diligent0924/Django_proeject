@@ -1,0 +1,9 @@
+<p>Detail page</p>
+<p>{{article.id}}</p>
+<p>{{article.name}}</p>
+<p>{{article.age}}</p>
+<p>{{article.descript}}</p>
+<form action= "{% url 'delete' article.id %}" method = "POST">
+  {% csrf_token %}
+  <button type='submit'>delete</button>
+</form>
