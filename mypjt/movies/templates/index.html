@@ -4,7 +4,7 @@
 <div class="container alert alert-success">
   <h1 class='text-center my-3'>상영중인 영화</h1>
   <div class='text-center'>
-    <a href="{% url 'movies:new' %}" class="text-decoration-none text-dark">영화 추가하기</a> 
+    <a href="{% url 'movies:create' %}" class="text-decoration-none text-dark">영화 추가하기</a> 
   </div>
 </div>
 {% for article in articles reversed %}

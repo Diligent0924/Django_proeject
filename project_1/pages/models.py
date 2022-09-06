@@ -9,7 +9,7 @@ class login(models.Model):
     grade = models.CharField(max_length=10, default = 'IM')
     age = models.IntegerField()
     telephone = models.IntegerField()
-    descript = models.TextField()
+    descriptn = models.TextField()
     
     def __Str__(self):
         return [self.id, self.password, self.grade, self.name, self.descript]

@@ -34,6 +34,9 @@ INSTALLED_APPS = [
     # 내부 앱
     "movies",
     "login",
+    "accounts",
+    # 외부 앱
+    'bootstrap5',
     # 기존
     'django.contrib.admin',
     'django.contrib.auth',
