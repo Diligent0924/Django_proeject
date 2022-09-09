@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if request.user.is_superuser == 1 %}
+<h1 class='text-center'>관리자님 사이트에 들어온 것을 환영합니다.</h1>
+<h2 class='text-center'>여기는 유저 정보 사이트입니다.</h2>
+<hr>
+{% endif %}
+
+{% if request.user.is_superuser == 1 %}
+  {% for data in database %}
+    {% if data.is_superuser == 1 %}
+      <h1 class='text-center'>관리자 정보</h1>
+      <hr>
+      <p class='text-center'> ADMIN ID : {{data.username}} </p>
+      <p class='text-center'> ADMIN EMAIL : {{data.email}} </p>
+      <p class='text-center'> ADMIN DATE : {{data.date_joined}} </p>
+    {% endif %}
+  {% endfor %}
+  <br><br><br><br>
+  <h1 class='text-center'>회원정보</h1>
+  {% for data in database %}
+    {% if data.is_superuser == 0 %}
+      <hr>
+      <p class='text-center'> USER ID : {{data.username}} </p>
+      <p class='text-center'> USER EMAIL : {{data.email}} </p>
+      <p class='text-center'> USER DATE : {{data.date_joined}} </p>
+      <p class='text-center'>
+        <a href="{% url 'accounts:update' data.id %}">변경하기</a>
+        <a href="{% url 'accounts:delete' data.id %}">삭제하기</a>
+      </p>
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if request.user.is_superuser == 0 %}
+  <h1>회원정보</h1>
+  {% for data in database %}
+      <hr>
+      USER ID : {{data.username}} <br>
+      USER EMAIL : {{data.email}} <br>
+      USER DATE : {{data.date_joined}}
+      {% if request.user.username == data.username %}
+      <a href="{% url 'accounts:update' data.id %}">변경하기</a>
+      <a href="{% url 'accounts:delete' data.id %}">삭제하기</a>
+      {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% endblock content %}

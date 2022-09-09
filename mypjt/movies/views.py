@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from . import models
 from django.views.decorators.http import require_safe, require_http_methods, require_POST
+from . import forms
 # Create your views here.
 @require_safe # GET인 요청에 대해서만 사용 => POST로 넘기면 405
 def index(request):
@@ -10,14 +11,6 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-# 추가하는 함수
-from . import forms
-def new(request):
-    form = forms.NewForm() # forms에서 가져오는 방식
-    context = {
-        "form" : form,
-    }
-    return render(request, "new.html", context)
 
 @require_http_methods(['GET','POST'])
 # 생성한 데이터를 저장하는 함수

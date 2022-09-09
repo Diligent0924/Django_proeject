@@ -1,0 +1,36 @@
+<h1>Home</h1>
+{% extends 'base.html' %}
+
+{% block login_content %}
+{% if request.user.is_authenticated %}
+<div>
+    <h1>{{request.user.username}}</h1>
+</div>
+<a href="#">회원정보확인</a>
+<a href= "{% url 'accounts:logout' %}">로그 아웃</a>
+{% else %} 
+<a href="{% url 'accounts:login' %}">로그인하기</a>
+{% endif %}
+{% endblock login_content %}
+
+{% block level %}
+<div><b>Bakjoon Level : 1</b></div>
+<div class="progress my-2" style='height: 30px;'>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
+<div><b>SWEA Level : 1</b></div>
+<div class="progress my-2" style='height: 30px;'>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
+<div><b>Programmers Level : 1</b></div>
+<div class="progress my-2" style='height: 30px;'>
+    <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+</div>
+{% endblock level %}
+
+{% block content %}
+<h1>content position</h1>
+{% for article in articles %}
+<p>{{article.title}}</p>
+{% endfor %}
+{% endblock content %}
