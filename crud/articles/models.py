@@ -1,3 +1,4 @@
+from platform import release
 from urllib import request
 from django.db import models
 
@@ -6,6 +7,8 @@ class ArticleModel(models.Model):
     username = models.CharField(max_length=30)
     title = models.CharField(max_length= 30)
     content = models.TextField()
+    release_date = models.DateField(auto_now = True)
+    update_date = models.DateField(auto_now_add= True)
 
 class PersonalModel(models.Model):
     variety_1 = (
