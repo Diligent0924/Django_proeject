@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1 class='my-5'>Backjoon</h1>
+<hr>
+<ul class="list-group">
+{% for article in articles %}
+{% if article.variety == "Backjoon" %}
+<a href="{% url 'articles:delete' article.id %}">delete</a>
+<a href="{% url 'articles:detail' article.id %}" class='text-decoration-none'>
+    <li class="list-group-item list-group-item-action">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-6 text-start">{{article.title}}</div>
+            <div class="col-2">{{article.username}}</div>
+            <div class="col-2">{{article.variety}}</div>
+            <div class="col-2">{{article.release_date}}</div>
+        </div>
+    </div>
+    </li>
+</a>
+{% endif %}
+{% endfor %}
+</ul>
+<h1 class='my-5'>SWEA</h1>
+<hr>
+<ul class="list-group">
+{% for article in articles %}
+{% if article.variety == "SWEA" %}
+<a href="{% url 'articles:delete' article.id %}">delete</a>
+<a href="{% url 'articles:detail' article.id %}" class='text-decoration-none'>
+    <li class="list-group-item list-group-item-action">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-6 text-start">{{article.title}}</div>
+            <div class="col-2">{{article.username}}</div>
+            <div class="col-2">{{article.variety}}</div>
+            <div class="col-2">{{article.release_date}}</div>
+        </div>
+    </div>
+    </li>
+</a>
+{% endif %}
+{% endfor %}
+</ul>
+<h1 class='my-5'>Programmers</h1>
+<hr>
+{% for article in articles %}
+{% if article.variety == "Programmers" %}
+<a href="{% url 'articles:delete' article.id %}">delete</a>
+<ul class="list-group">
+    <a href="{% url 'articles:detail' article.id %}" class='text-decoration-none'>
+        <li class="list-group-item list-group-item-action">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-6 text-start">{{article.title}}</div>
+                <div class="col-2">{{article.username}}</div>
+                <div class="col-2">{{article.variety}}</div>
+                <div class="col-2">{{article.release_date}}</div>
+            </div>
+        </div>
+        </li>
+    </a>
+</ul>
+{% endif %}
+{% endfor %}
+
+{% endblock content %}

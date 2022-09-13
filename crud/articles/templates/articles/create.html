@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+{% if same %}
+같은 제목을 쓰지 마시오.
+{% endif %}
+<form action="{% url 'articles:create' %}" method = "POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    {% endbuttons %}
+</form>
+{% endblock content %}
