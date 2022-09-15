@@ -1,11 +1,11 @@
 from wsgiref.util import request_uri
 from django.shortcuts import render, redirect
-from .models import ArticleModel
-from .forms import ArticleForm
+from .models import ArticleModel, CommentModel
+from .forms import ArticleForm, CommentForm
 
 # Create your views here.
 def home(request):
-    articles = ArticleModel.objects.all()
+    articles = ArticleModel.objects.all()[:10]
     context = {
         "articles" : articles
     }
@@ -13,8 +13,22 @@ def home(request):
 
 def detail(request, id):
     article = ArticleModel.objects.get(id = id)
+    print(article)
+    comment_articles = CommentModel.objects.filter(article = article)
+    if request.user.is_authenticated and request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.article = article
+            comment.username = request.user.username
+            comment.save()
+            return redirect("articles:detail", article.id)
+    else:
+        comment_form = CommentForm()
     context = {
-        "article" : article
+        "article" : article,
+        "comment_form" : comment_form,
+        "comment_articles" : comment_articles,
     }
     return render(request, "articles/detail.html", context)
     
@@ -48,6 +62,7 @@ def delete(request, id):
     article.delete()
     return redirect("articles:home")
 
+# 개인게시판
 def myarticle(request):
     articles = ArticleModel.objects.filter(username = request.user.username)
     context = {
@@ -55,3 +70,37 @@ def myarticle(request):
     }
     
     return render(request, "articles/myarticle.html", context)
+
+def comment_delete(request, id):
+    comment = CommentModel.objects.get(id = id)
+    comment.delete()
+    return redirect("articles:detail", comment.article.id) # comment.article을 외부키로 뒀기 때문에 같이 삭제되는 것 같다.
+
+# 여기서부터는 종류별로 페이지 호출하는 함수
+def else_board(request):
+    articles = ArticleModel.objects.filter(variety = "else")
+    context = {
+        "articles" : articles
+    }
+    return render(request, "articles/else_board.html", context)
+
+def Backjoon_board(request):
+    articles = ArticleModel.objects.filter(variety = "Backjoon")
+    context = {
+        "articles" : articles
+    }
+    return render(request, "articles/Backjoon_board.html", context)
+
+def SWEA_board(request):
+    articles = ArticleModel.objects.filter(variety = "SWEA")
+    context = {
+        "articles" : articles
+    }
+    return render(request, "articles/SWEA_board.html", context)
+
+def Programmers_board(request):
+    articles = ArticleModel.objects.filter(variety = "Programmers")
+    context = {
+        "articles" : articles
+    }
+    return render(request, "articles/Programmers_board.html", context)

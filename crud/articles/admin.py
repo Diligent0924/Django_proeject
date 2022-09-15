@@ -5,3 +5,4 @@ class articleadmin(admin.ModelAdmin):
     list_display = ('username','title','release_date','update_date')
 
 admin.site.register(models.ArticleModel, articleadmin)
+admin.site.register(models.CommentModel)

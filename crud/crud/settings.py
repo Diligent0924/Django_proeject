@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-_9vrj&ay*e=gk^p6ev5^el7fceg1sai98goy=8m)25exr78r##
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['62cd-175-209-87-33.jp.ngrok.io','127.0.0.1'] # 허용할 도메인
-CSRF_TRUSTED_ORIGINS = ["https://62cd-175-209-87-33.jp.ngrok.io"] # CSRF(보안)을 해제하는 함수
+ALLOWED_HOSTS = ["*"] # 허용할 도메인
+CSRF_TRUSTED_ORIGINS = ["https://40df-118-103-196-22.jp.ngrok.io"] # CSRF(보안)을 해제하는 함수
 
 # Application definition
 
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'articles',
     # 웹,
     'bootstrap5',
+    'markdown_deux',
     # 기존 앱
     'django.contrib.admin',
     'django.contrib.auth',

@@ -37,7 +37,7 @@ def create(request):
         if form.is_valid():
             user = form.save()
             auth_login(request, user)
-            return redirect('accounts:index')
+            return redirect('articles:home')
     else:
         form = CustomUserCreationForm()
     context = {
@@ -54,7 +54,10 @@ def update(request, id):
         form = CustomUserChangeForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-        return redirect("accounts:index")
+        if request.user.is_superuser:
+            return redirect("accounts:index")
+        else:
+            return redirect("articles:home")
     else:
         if request.user.is_superuser == 1:
             user = User.objects.get(id=id)

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
+{% load markdown_deux_tags %}
 
 {% block content %}
 <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">{{article.title}}</a>
     <ul class="nav nav-pills">
       <li class="nav-item">
         <a class="nav-link" href="#scrollspyHeading1">{{article.username}}</a>
@@ -13,7 +15,35 @@
     </ul>
 </nav>
 <div data-bs-spy="scroll" class="scrollspy-example bg-light p-3 rounded-2 my-3" tabindex="0">
-    <p>{{article.content|linebreaks}}</p>
+  <div>{{article.content|linebreaks}}</div>
 </div>
+<h2 class='my-5'>댓글</h2>
+{% for comment_article in comment_articles %}
+{% if request.user.username == comment_article.username %}
+<a href="{% url 'articles:comment_delete' comment_article.id %}">delete</a>
+{% endif %}
+<nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
+  <div>{{comment_article.comment|markdown|linebreaks}}</div>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      {{comment_article.username}}
+    </li>
+    <li class="nav-item">
+      {{comment_article.create_at}}
+    </li>
 
+  </ul>
+</nav>
+{% endfor %}
+{% if request.user.is_authenticated %}
+<form action="{% url 'articles:detail' article.id %}" method="POST" class="form">
+  {% csrf_token %}
+  {% bootstrap_form comment_form %}
+  {% buttons %}
+    <button type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  {% endbuttons %}
+</form>
+{% endif %}
 {% endblock content %}
