@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% load markdown_deux_tags %}
+{% load pygmentify_tags %}
 
 {% block content %}
 <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
@@ -23,12 +24,12 @@
 <a href="{% url 'articles:comment_delete' comment_article.id %}">delete</a>
 {% endif %}
 <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
-  <div>{{comment_article.comment|markdown|linebreaks}}</div>
+  <pre>{{comment_article.comment|markdown|linebreaks}}</pre>
   <ul class="nav nav-pills">
-    <li class="nav-item">
+    <li class="nav-item mx-5">
       {{comment_article.username}}
     </li>
-    <li class="nav-item">
+    <li class="nav-item mx-5">
       {{comment_article.create_at}}
     </li>
 
