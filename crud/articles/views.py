@@ -5,15 +5,26 @@ from .forms import ArticleForm, CommentForm
 
 # Create your views here.
 def home(request):
-    articles = ArticleModel.objects.all()[:10]
+    articles = ArticleModel.objects.all()
+    comments = CommentModel.objects.all()
+    comments_dic = {}
+    for article in articles:
+        comments = CommentModel.objects.filter(article = article)
+        comments_dic[article.id] = len(comments)
+        print(comments_dic[article.id])
+        
     context = {
-        "articles" : articles
+        "articles" : articles,
+        "comments_dic" : comments_dic,
     }
     return render(request, 'articles/home.html', context)
 
+# 상세 페이지
 def detail(request, id):
     article = ArticleModel.objects.get(id = id)
-    print(article)
+    article.visited = article.visited + 1
+    article.save() # 방문수를 계산하기 위해서 조회수를 저장해둔다.
+    print(article.visited)
     comment_articles = CommentModel.objects.filter(article = article)
     if request.user.is_authenticated and request.method == "POST":
         comment_form = CommentForm(request.POST)

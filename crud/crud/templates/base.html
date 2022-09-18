@@ -21,7 +21,6 @@
               <li class="nav-item mx-5">
                 <a href="{% url 'articles:else_board' %}" class="text-decoration-none text-dark">기타 잡담</a>
               </li>
-              {% if request.user.is_authenticated %}
               <li class="nav-item mx-5">
                 <a href="{% url 'articles:Backjoon_board' %}" class="text-decoration-none text-dark">Backjoon</a>
               </li>
@@ -31,7 +30,6 @@
               <li class="nav-item mx-5">
                 <a href="{% url 'articles:Programmers_board' %}" class="text-decoration-none text-dark">Programmers</a>
               </li>
-              {% endif %}
               {% if request.user.is_superuser %}
               <li class="nav-item mx-5">
                 <a href="{% url 'accounts:index' %}">회원정보보기</a>

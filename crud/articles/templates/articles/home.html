@@ -4,22 +4,34 @@
 <ul class="list-group border border-4 my-5">
     <li class="list-group-item d-flex justify-content-between align-items-center">
       <h1>전체게시판</h1>
-      <span class="badge badge-primary badge-pill mx-5"><a href="{% url 'articles:create' %}">CREATE</a></span>
+      {% if request.user.is_active %}
+      <span class="badge badge-primary badge-pill mx-5"><a href="{% url 'articles:create' %}">게시글 작성하기</a></span>
+      {% endif %}
     </li>
 </ul>
 
 <ul class="list-group">
-    {% for article in articles %}
+    {% for article in articles reversed %}
     {% if request.user.is_superuser or request.user.username == article.username%}
-    <div><a href="{% url 'articles:delete' article.id %}"> delete </a></div>
+    <div class='my-2'><a href="{% url 'articles:delete' article.id %}" class='bg-secondary rounded text-white mx-3 px-2 text-decoration-none'> delete </a></div>
     {% endif %}
     <a href="{% url 'articles:detail' article.id %}" class='text-decoration-none'>
     <li class="list-group-item list-group-item-action">
     <div class="container text-center">
         <div class="row">
-            <div class="col-6 text-start">{{article.title}}</div>
-            <div class="col-2">{{article.username}}</div>
-            <div class="col-2">{{article.variety}}</div>
+            <div class="col-1 text-start">{{article.id}}</div>              
+            <div class="col-6 text-start">{{article.title}}
+            {% for key, value in comments_dic.items %}
+                {% if key == article.id %}
+                    [{{value}}]
+                    {% if value >= 5 %}
+                    <span class='bg-secondary rounded text-white mx-3 px-2'>추천</span>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </div>
+            <div class="col-1">{{article.username}}</div>
+            <div class="col-1">{{article.variety}}</div>
             <div class="col-2">{{article.release_date}}</div>
         </div>
     </div>

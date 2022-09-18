@@ -13,10 +13,13 @@
       <li class="nav-item">
         <a class="nav-link" href="#scrollspyHeading2">{{article.release_date}}</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#scrollspyHeading2">조회 수 : {{article.visited}}</a>
+      </li>
     </ul>
 </nav>
 <div data-bs-spy="scroll" class="scrollspy-example bg-light p-3 rounded-2 my-3" tabindex="0">
-  <div>{{article.content|linebreaks}}</div>
+  <div>{{article.content|markdown|linebreaks}}</div>
 </div>
 <h2 class='my-5'>댓글</h2>
 {% for comment_article in comment_articles %}
@@ -32,7 +35,6 @@
     <li class="nav-item mx-5">
       {{comment_article.create_at}}
     </li>
-
   </ul>
 </nav>
 {% endfor %}
