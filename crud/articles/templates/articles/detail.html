@@ -1,20 +1,19 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
 {% load markdown_deux_tags %}
-{% load pygmentify_tags %}
 
 {% block content %}
-<nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
+<nav id="navbar-example2" class="navbar px-3 mb-3">
     <a class="navbar-brand" href="#">{{article.title}}</a>
     <ul class="nav nav-pills">
       <li class="nav-item">
-        <a class="nav-link" href="#scrollspyHeading1">{{article.username}}</a>
+        <span class="nav-link text-dark">{{article.username}}</span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#scrollspyHeading2">{{article.release_date}}</a>
+        <span class="nav-link text-dark">{{article.release_date}}</span>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#scrollspyHeading2">조회 수 : {{article.visited}}</a>
+        <span class="nav-link text-dark">조회 수 : {{article.visited}}</span>
       </li>
     </ul>
 </nav>
@@ -27,7 +26,10 @@
 <a href="{% url 'articles:comment_delete' comment_article.id %}">delete</a>
 {% endif %}
 <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
-  <pre>{{comment_article.comment|markdown|linebreaks}}</pre>
+  <pre>
+    {{comment_article.comment|markdown|linebreaks}}
+    <a href="#">댓글</a>
+  </pre>
   <ul class="nav nav-pills">
     <li class="nav-item mx-5">
       {{comment_article.username}}

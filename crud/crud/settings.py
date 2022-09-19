@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     # 웹,
     'bootstrap5',
     'markdown_deux',
-    'pygmentify',
     # 기존 앱
     'django.contrib.admin',
     'django.contrib.auth',

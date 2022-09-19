@@ -1,4 +1,3 @@
-from platform import release
 from urllib import request
 from django.db import models
 
@@ -22,5 +21,12 @@ class CommentModel(models.Model):
     article = models.ForeignKey(ArticleModel, on_delete=models.CASCADE)
     username = models.CharField(max_length=30, default="Please write")
     comment = models.TextField()
-    create_at = models.DateTimeField(auto_now = True)
-    update_at = models.DateField(auto_now_add=True)
+    create_at = models.DateTimeField(auto_now_add = True)
+    update_at = models.DateField(auto_now = True)
+
+class CommentModel_2(models.Model):
+    article = models.ForeignKey(CommentModel, on_delete=models.CASCADE)
+    username = models.CharField(max_length=30, default="Please write")
+    comment = models.TextField()
+    create_at = models.DateTimeField(auto_now_add = True)
+    update_at = models.DateTimeField(auto_now = True)

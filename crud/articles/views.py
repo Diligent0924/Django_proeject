@@ -1,4 +1,3 @@
-from wsgiref.util import request_uri
 from django.shortcuts import render, redirect
 from .models import ArticleModel, CommentModel
 from .forms import ArticleForm, CommentForm
@@ -7,15 +6,17 @@ from .forms import ArticleForm, CommentForm
 def home(request):
     articles = ArticleModel.objects.all()
     comments = CommentModel.objects.all()
+    N = len(articles)
+    new_articles = []
     comments_dic = {}
-    for article in articles:
+    for i in range(N):
+        article = articles[i]
         comments = CommentModel.objects.filter(article = article)
-        comments_dic[article.id] = len(comments)
-        print(comments_dic[article.id])
-        
+        new_articles.append((article,len(comments),N-i))
+    
+    print(new_articles)
     context = {
-        "articles" : articles,
-        "comments_dic" : comments_dic,
+        "articles" : new_articles,
     }
     return render(request, 'articles/home.html', context)
 
