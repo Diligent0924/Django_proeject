@@ -16,3 +16,4 @@ class CommentForm(forms.ModelForm):
         model = CommentModel
         fields = "__all__"
         exclude = ('article','username')
+    # 이러지마 제발..
