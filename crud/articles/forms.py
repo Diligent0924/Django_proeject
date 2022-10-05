@@ -1,5 +1,7 @@
+from csv import excel
+from dataclasses import field
 from django import forms
-from .models import ArticleModel, CommentModel
+from .models import ArticleModel, CommentModel, CommentModel_2
 
 class ArticleForm(forms.ModelForm):
     
@@ -16,4 +18,9 @@ class CommentForm(forms.ModelForm):
         model = CommentModel
         fields = "__all__"
         exclude = ('article','username')
-    # 이러지마 제발.. 제발...제발... 제발..
+
+class Comment2Form(forms.ModelForm):
+    class Meta:
+        model = CommentModel_2
+        fields = "__all__"
+        exclude = ("artile",'username')

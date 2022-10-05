@@ -1,52 +1,49 @@
 <template>
-    <v-card>
-      <v-toolbar
-        color="cyan"
-        dark
-        flat
-      >
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-  
-        <v-toolbar-title>PYC website</v-toolbar-title>
-  
-        <v-spacer></v-spacer>
-  
-        <v-btn icon>
-          <v-icon>mdi-magnify</v-icon>
+  <div id="whole">
+    <v-toolbar app>
+      <span class="hidden-sm-and-up">
+        <v-toolbar-side-icon @click="sidebar = !sidebar">
+        </v-toolbar-side-icon>
+      </span>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor: pointer">
+          {{ appTitle }}
+        </router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-xs-only">
+        <v-btn
+          flat
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.path">
+          {{ item.title }}
         </v-btn>
-  
-        <v-btn icon>
-          <v-icon>mdi-dots-vertical</v-icon>
-        </v-btn>
-  
-        <template v-slot:extension>
-          <v-tabs
-            v-model="tab"
-            align-with-title
-          >
-            <v-tabs-slider color="yellow"></v-tabs-slider>
-  
-            <v-tab
-              v-for="item in items"
-              :key="item"
-            >
-              {{ item }}
-            </v-tab>
-          </v-tabs>
-        </template>
-      </v-toolbar>
-      </v-card>
-  </template>
-  
-  <script>
-    export default {
-      data () {
-        return {
-          tab: null,
-          items: [
-            'web', 'shopping', 'videos', 'images', 'news',
-          ],
-        }
-      },
+      </v-toolbar-items>
+    </v-toolbar>
+  </div>
+
+</template>
+
+<script>
+export default {
+  name: "App",
+  data(){
+    return {
+      appTitle: 'S-MEET',
+      sidebar: false,
+      menuItems: [
+          { title: '반별게시판', path: '/home'},
+          { title: '익명게시판', path: '/home'},
+          { title: 'Sign Up', path: '/signup'},
+          { title: 'Sign In', path: '/signin'}
+     ]
     }
-  </script>
+  },
+};
+</script>
+<style> 
+#whole{
+  margin-bottom: 5%;
+}
+</style>

@@ -28,7 +28,7 @@
 <nav id="navbar-example2" class="navbar bg-light px-3 mb-3">
   <pre>
     {{comment_article.comment|markdown|linebreaks}}
-    <a href="#">댓글</a>
+    <a href="{% url 'articles:comment_2' comment_article.id %}" class='text-decoration-none text-black'>댓글달기</a>
   </pre>
   <ul class="nav nav-pills">
     <li class="nav-item mx-5">

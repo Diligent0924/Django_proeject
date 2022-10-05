@@ -6,3 +6,4 @@ class articleadmin(admin.ModelAdmin):
 
 admin.site.register(models.ArticleModel, articleadmin)
 admin.site.register(models.CommentModel)
+admin.site.register(models.CommentModel_2)  

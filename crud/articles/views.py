@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import ArticleModel, CommentModel
-from .forms import ArticleForm, CommentForm
+from .forms import ArticleForm, CommentForm, Comment2Form
 
 # Create your views here.
 def home(request):
@@ -25,12 +25,12 @@ def detail(request, id):
     article = ArticleModel.objects.get(id = id)
     article.visited = article.visited + 1
     article.save() # 방문수를 계산하기 위해서 조회수를 저장해둔다.
-    print(article.visited)
     comment_articles = CommentModel.objects.filter(article = article)
     if request.user.is_authenticated and request.method == "POST":
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
+            print(comment)
             comment.article = article
             comment.username = request.user.username
             comment.save()
@@ -116,3 +116,17 @@ def Programmers_board(request):
         "articles" : articles
     }
     return render(request, "articles/Programmers_board.html", context)
+
+# 대댓글을 달 수 있도록 하는 기능 => detail page에서 만들어야하는데?
+def comment_2(request, id):
+    if not request.user.is_authenticated:
+        return redirect("articles:home")
+    
+    if request.method == "POST":
+        pass
+    else:
+        form = Comment2Form(initial={'username':request.user.username})
+    context = {
+        'form' : form
+    }
+    return render(request, "articles/Programmers_board.html")

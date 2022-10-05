@@ -13,4 +13,5 @@ urlpatterns = [
     path('Backjoon_board/', views.Backjoon_board, name = 'Backjoon_board'),
     path('SWEA_board/', views.SWEA_board, name = 'SWEA_board'),
     path('Programmers_board/', views.Programmers_board, name = 'Programmers_board'),
+    path('<int:id>/comment_2/', views.comment_2, name = 'comment_2')
 ]
